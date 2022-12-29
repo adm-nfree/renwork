@@ -33,26 +33,26 @@ def nullcheck(dirpath): #Check mqlist for null
 ### DEFINE VARIABLES #################################################
 dirpath = os.path.dirname(os.path.realpath(__file__)) # Full path to script
 
-print("MQ data (C)N-Free|\n-------------------\nPlease, enter MQ manager name (full, or part), or enter \"help\" for more information")
+print("MQ data (C)N-Free|\n-------------------\nPlease, enter the MQ manager name (full, or part), or enter \"help\" for more information")
 arg = raw_input("-------------------\n>")
 print("-------------------")
 ######################################################################
 
 
 while arg == "help":
-    print("You can enter full or part of MQ manager name example:\nFull: QMMCS.TEST11\nPart: MCS\nAs result the programm will be create file(s) for each manager with full information.\n")
+    print("You can enter full or a part of MQ manager name, example:\nFull: QMMCS.TEST11\nPart: MCS\nAs a result the program will be create a file(s) for each manager with full information.\n")
     arg = raw_input("-------------------\n>")
 if not arg:
-    print("You didn't enter any argument.\nThe programm will provide information about all MQ managers. \nYou can find it in the script directory: " + dirpath)
+    print("You didn't enter any argument.\nThe program will provide information about all MQ managers. \nYou can find it in the script directory: " + dirpath)
     time.sleep(1)
     without_arg(dirpath)
     fetch(dirpath)
 else:
-    print("Your argument is: " + arg + "\nThe programm will provide information about MQ managers, which contains the keyword.\nYou can find it in the script directory: " + dirpath)
+    print("Your argument is: " + arg + "\nThe program will provide information about MQ managers having the keyword in their name.\nYou can find it in the script directory: " + dirpath)
     with_arg(arg, dirpath)
     time.sleep(1)
     filesize=nullcheck(dirpath)
     if filesize == 0:
-        print("\nSorry, the programm didn't found any MQ Manager with your keyword. \nPlese make sure that you enter right name and try again.")
+        print("\nSorry, the program didn't find any MQ Manager with your keyword. \nPlease make sure that you enter a right name and try again.")
     else:
         fetch(dirpath)
