@@ -23,10 +23,20 @@ def fetch(dirpath): # Fetching full information
             res=str(result[0])
             os.popen("echo 'DISPLAY CHANNEL(*)' | runmqsc " + res + " | grep 'CHLTYPE' | grep -v SYSTEM > " + dirpath + "/" +"/" + res + ".info; echo 'DISPLAY LISTENER(*) PORT' | runmqsc " + res + " | grep LSTNR >> " + dirpath + "/" +"/" + res + ".info; echo 'DISPLAY QL(*)' | runmqsc " + res + " | grep QUEUE | grep -v SYSTEM >> " + dirpath + "/" +"/" + res + ".info")
 
-def nullcheck(dirpath): #Check mqlist for null
+def nullcheck(dirpath): # Check mqlist for null
     file=dirpath + "/mqlist"
     filesize=os.path.getsize(file)
     return filesize
+
+def userinput(): # User input funtion
+    try:
+        arg = raw_input("-------------------\n>")
+        return arg
+    except KeyboardInterrupt:
+        print("\n\nProgram stopped by user. >_<")
+        sys.exit(0)
+    else:
+        print("-------------------")
 
 ######################################################################
 
@@ -34,14 +44,13 @@ def nullcheck(dirpath): #Check mqlist for null
 dirpath = os.path.dirname(os.path.realpath(__file__)) # Full path to script
 
 print("MQ data (C)N-Free|\n-------------------\nPlease, enter the MQ manager name (full, or part), or enter \"help\" for more information")
-arg = raw_input("-------------------\n>")
-print("-------------------")
+arg = userinput()
 ######################################################################
 
 
 while arg == "help":
     print("You can enter full or a part of MQ manager name, example:\nFull: QMMCS.TEST11\nPart: MCS\nAs a result the program will be create a file(s) for each manager with full information.\n")
-    arg = raw_input("-------------------\n>")
+    arg = userinput()
 if not arg:
     print("You didn't enter any argument.\nThe program will provide information about all MQ managers. \nYou can find it in the script directory: " + dirpath)
     time.sleep(1)
